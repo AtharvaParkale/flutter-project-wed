@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/di/injection.dart';
+import 'package:flutter_project/features/counter/counter_screen.dart';
 import 'package:flutter_project/features/users/presentation/ui/screens/users_screen.dart';
 import 'package:flutter_project/packages/design/design_system/design_system.dart';
 import 'package:flutter_project/practice/features/form_practice.dart';
@@ -35,14 +36,16 @@ class TamaraApp extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
       ),
-      home: BlocProvider(
-        create: (BuildContext context) => ProductBloc(
-          getAllProductsUseCase: GetAllProductsUseCase(
-            ProductsRepositoryImpl(ProductsRemoteDatasourceImpl()),
-          ),
-        ),
-        child: UsersScreen(),
-      ),
+
+      // home: BlocProvider(
+      //   create: (BuildContext context) => ProductBloc(
+      //     getAllProductsUseCase: GetAllProductsUseCase(
+      //       ProductsRepositoryImpl(ProductsRemoteDatasourceImpl()),
+      //     ),
+      //   ),
+      //   child: UsersScreen(),
+      // ),
+      home: CounterScreen(title: "Counter Screen"),
     );
   }
 }
