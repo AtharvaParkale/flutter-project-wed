@@ -12,31 +12,24 @@ import 'package:flutter_project/packages/core/network/network.dart';
 final getIt = GetIt.instance;
 
 void setupDependencies() {
-  getIt.registerLazySingleton<Logger>(
-    () => ConsoleLogger()..initialize(),
-  );
+  getIt.registerLazySingleton<Logger>(() => ConsoleLogger()..initialize());
 
-  getIt.registerLazySingleton<AnalyticsService>(
-    () => ConsoleAnalytics(),
-  );
+  getIt.registerLazySingleton<AnalyticsService>(() => ConsoleAnalytics());
 
   getIt.registerLazySingleton<Dio>(() => Dio());
   getIt.registerLazySingleton<ApiClient>(
-    () => ApiClient(
-      getIt<Dio>(),
-      baseUrl: 'https://fakestoreapi.com',
-    ),
+    () => ApiClient(getIt<Dio>(), baseUrl: 'https://fakestoreapi.com'),
   );
 
   // Users feature
-  getIt.registerFactory<UsersRemoteDataSource>(() => UsersRemoteDatasourceImpl());
+  getIt.registerFactory<UsersRemoteDataSource>(
+    () => UsersRemoteDatasourceImpl(),
+  );
   getIt.registerFactory<UsersRepository>(
     () => UsersRepositoryImpl(remoteDataSource: getIt()),
   );
   getIt.registerFactory<GetUsersUseCase>(
     () => GetUsersUseCase(usersRepository: getIt()),
   );
-  getIt.registerFactory<UsersBloc>(
-    () => UsersBloc(getUsersUseCase: getIt()),
-  );
+  getIt.registerFactory<UsersBloc>(() => UsersBloc(getUsersUseCase: getIt()));
 }
