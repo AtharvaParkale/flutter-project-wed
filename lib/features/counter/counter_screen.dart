@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/features/counter/counter.dart';
 
 class CounterScreen extends StatefulWidget {
   const CounterScreen({super.key, required this.title});
@@ -10,11 +11,13 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
-  int _counter = 0;
+  final Counter counter = Counter();
 
+
+  // Now this is testable
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      counter.incrementCounter();
     });
   }
 
@@ -31,7 +34,7 @@ class _CounterScreenState extends State<CounterScreen> {
           children: <Widget>[
             const Text('You have pushed the button this many times:'),
             Text(
-              '$_counter',
+              '${counter.count}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
