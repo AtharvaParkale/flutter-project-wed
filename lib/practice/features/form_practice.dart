@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/practice/features/layout_practice.dart';
 import 'package:flutter_project/practice/item.dart';
 
 class FormPractice extends StatefulWidget {
@@ -63,23 +64,40 @@ class _FormPracticeState extends State<FormPractice> {
                           return null;
                         },
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            setState(() {
-                              items.add(
-                                Item(
-                                  name: nameController.text,
-                                  id: int.tryParse(nameController.text) ?? 0,
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  items.add(
+                                    Item(
+                                      name: nameController.text,
+                                      id:
+                                          int.tryParse(nameController.text) ??
+                                          0,
+                                    ),
+                                  );
+
+                                  nameController.clear();
+                                  idController.clear();
+                                });
+                              }
+                            },
+                            child: Text("Submit"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      const LayoutPractice(),
                                 ),
                               );
-
-                              nameController.clear();
-                              idController.clear();
-                            });
-                          }
-                        },
-                        child: Text("Submit"),
+                            },
+                            child: Text("Navigate"),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 10),
                     ],

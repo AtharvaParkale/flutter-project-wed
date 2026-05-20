@@ -31,7 +31,6 @@ class TamaraApp extends StatelessWidget {
   }
 }
 
-
 class ProductsPlaceholderScreen extends StatelessWidget {
   const ProductsPlaceholderScreen({super.key});
 
