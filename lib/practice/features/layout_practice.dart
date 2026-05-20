@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/practice/item.dart';
 
 class LayoutPractice extends StatefulWidget {
   const LayoutPractice({super.key});
@@ -70,11 +71,4 @@ class _LayoutPracticeState extends State<LayoutPractice> {
       ),
     );
   }
-}
-
-class Item {
-  final String name;
-  final int id;
-
-  Item({required this.name, required this.id});
 }
