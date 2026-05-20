@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/di/injection.dart';
 import 'package:flutter_project/packages/design/design_system/design_system.dart';
 import 'package:flutter_project/practice/features/form_practice.dart';
 import 'package:flutter_project/practice/features/layout_practice.dart';
+import 'package:flutter_project/practice/features/products/data/datasources/products_remote_datasource_impl.dart';
+import 'package:flutter_project/practice/features/products/data/repositories/products_repository_impl.dart';
+import 'package:flutter_project/practice/features/products/domain/repositories/products_repository.dart';
+import 'package:flutter_project/practice/features/products/domain/usecases/get_all_products_usecase.dart';
+import 'package:flutter_project/practice/features/products/presentation/bloc/product_bloc.dart';
+
+import 'practice/features/products/presentation/screens/products_screen.dart';
 
 void main() {
   setupDependencies();
@@ -26,7 +34,14 @@ class TamaraApp extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
       ),
-      home: const FormPractice(),
+      home: BlocProvider(
+        create: (BuildContext context) => ProductBloc(
+          getAllProductsUseCase: GetAllProductsUseCase(
+            ProductsRepositoryImpl(ProductsRemoteDatasourceImpl()),
+          ),
+        ),
+        child: ProductsScreen(),
+      ),
     );
   }
 }
