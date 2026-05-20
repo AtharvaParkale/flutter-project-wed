@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/di/injection.dart';
+import 'package:flutter_project/features/users/presentation/ui/screens/users_screen.dart';
 import 'package:flutter_project/packages/design/design_system/design_system.dart';
 import 'package:flutter_project/practice/features/form_practice.dart';
 import 'package:flutter_project/practice/features/layout_practice.dart';
@@ -40,7 +41,7 @@ class TamaraApp extends StatelessWidget {
             ProductsRepositoryImpl(ProductsRemoteDatasourceImpl()),
           ),
         ),
-        child: ProductsScreen(),
+        child: UsersScreen(),
       ),
     );
   }
