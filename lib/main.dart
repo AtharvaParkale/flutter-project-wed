@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/di/injection.dart';
 import 'package:flutter_project/packages/design/design_system/design_system.dart';
+import 'package:flutter_project/practice/features/layout_practice.dart';
 
 void main() {
   setupDependencies();
@@ -24,10 +25,11 @@ class TamaraApp extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: const AppBarTheme(centerTitle: true, elevation: 0),
       ),
-      home: const ProductsPlaceholderScreen(),
+      home: const LayoutPractice(),
     );
   }
 }
+
 
 class ProductsPlaceholderScreen extends StatelessWidget {
   const ProductsPlaceholderScreen({super.key});
