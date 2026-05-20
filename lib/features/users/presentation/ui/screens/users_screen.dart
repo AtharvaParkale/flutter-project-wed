@@ -15,9 +15,9 @@ class UsersScreen extends StatelessWidget {
         body: BlocConsumer<UsersBloc, UsersState>(
           listener: (context, state) {
             if (state is UsersErrorState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text(state.message)));
             }
           },
           builder: (context, state) {
@@ -25,16 +25,41 @@ class UsersScreen extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is UsersSuccessState) {
-              return ListView.builder(
-                itemCount: state.items.length,
-                itemBuilder: (context, index) {
-                  final user = state.items[index];
-                  return ListTile(
-                    title: Text(user.name),
-                    subtitle: Text(user.email),
-                    trailing: Text(user.website),
-                  );
-                },
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          context.read<UsersBloc>().add(SortByNameEvent());
+                        },
+                        child: Text("Sort By Name"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context.read<UsersBloc>().add(SortByIdEvent());
+                        },
+                        child: Text("Sort By ID"),
+                      ),
+                    ],
+                  ),
+                  ListView.builder(
+                    itemCount: state.items.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final user = state.items[index];
+                      return ListTile(
+                        title: Text(user.name),
+                        subtitle: Text(user.email),
+                        trailing: GestureDetector(
+                          onTap: () {},
+                          child: Text("Delete"),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               );
             }
             if (state is UsersErrorState) {
