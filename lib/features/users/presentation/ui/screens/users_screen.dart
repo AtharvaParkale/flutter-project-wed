@@ -53,7 +53,9 @@ class UsersScreen extends StatelessWidget {
                         title: Text(user.name),
                         subtitle: Text(user.email),
                         trailing: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            context.read<UsersBloc>().add(DeleteUser(id: user.id));
+                          },
                           child: Text("Delete"),
                         ),
                       );

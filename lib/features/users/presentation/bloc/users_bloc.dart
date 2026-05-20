@@ -21,6 +21,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     on<GetAllUsersEvent>(_onGetAllUsers);
     on<SortByNameEvent>(_onSortByNameEvent);
     on<SortByIdEvent>(_onSortByIdEvent);
+    on<DeleteUser>(_onDeleteUser);
   }
 
   Future<void> _onGetAllUsers(
@@ -50,6 +51,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     Emitter<UsersState> emit,
   ) {
     users.sort((a, b) => a.id.compareTo(b.id));
+    emit(UsersSuccessState(items: users));
+  }
+
+  FutureOr<void> _onDeleteUser(DeleteUser event, Emitter<UsersState> emit) {
+    users.removeWhere((user) => event.id == user.id);
     emit(UsersSuccessState(items: users));
   }
 }
